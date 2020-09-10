@@ -5,11 +5,21 @@ from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 
 from blog.models.comment import Comment
 from blog.models.post import Post,Tag
+from django.shortcuts import render
 
 from django import forms
 
 class NameForm(forms.Form):
-    your_name = forms.CharField(label='Your name', max_length=100)
+    tags = forms.CharField(label='Your name', max_length=100)
+
+def PageObjects(request):
+    print(request)
+#   if request.method == 'POST':
+#     form = NameForm(request.POST)
+#     print(form)
+
+#     if form.is_valid():
+#       answer = form.cleaned_data['value']
 
 class PostView(generic.DetailView):
     model = Post
@@ -34,18 +44,18 @@ class PostCreate(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-def PostSearch(request,*args,**kwargs):
-    # model = Post
-    # fields = ['title']
+class PostSearch(LoginRequiredMixin, CreateView):
+    model = Post
+    fields = ['tag']
     allTags = Tag.objects.filter()
     names = []
     for tag in allTags:
         my_tuple = (tag.name,tag.name)
         names.append(tag)
-    form = NameForm()
-    return render(request, '/blog/search_post.html', {'form': form})
-    # template_name = 'blog/search_post.html'
-    # login_url = reverse_lazy('login')
+    # form = NameForm()
+    # return render(request, '/blog/search_post.html', {'form': form})
+    template_name = 'blog/search_post.html'
+    login_url = reverse_lazy('login')
 
     # def test_func(self):
     #     return Post.objects.get(id=self.kwargs['pk']).user == self.request.user

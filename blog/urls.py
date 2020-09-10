@@ -20,6 +20,6 @@ urlpatterns = [
     path('post/<int:pk>/delete/', PostDelete.as_view(), name='delete_post'),
     # ex: /blog/post/5/comment/
     path('post/<int:pk>/comment/', CommentCreate.as_view(), name='create_comment'),
-    # path('<str:username>', PostSearch, name='search_post'),
+    path('post/search', PostSearch.as_view(), name='search_post'),
     # path('/', home, name='home_search'),
 ]
