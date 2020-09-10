@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Reflections</title>
+    <title>Django Blog</title>
 
     <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
           rel="stylesheet" media="screen"/>
@@ -21,25 +21,21 @@
             <a class="navbar-brand" href="{% url 'blog:home' %}">Blog App</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse navbar-right">
-            <!-- show registration only if user is not yet authenticated -->
             {% if not user.is_authenticated %}
                 <ul class="nav navbar-nav ">
                     <li class="active"><a href="{% url 'register' %}">Registration</a></li>
                 </ul>
             {% endif %}
-            <!-- show login only if user is not yet authenticated -->
             {% if not user.is_authenticated %}
                 <ul class="nav navbar-nav ">
                     <li class="active"><a href="{% url 'login' %}">Login</a></li>
                 </ul>
             {% endif %}
-            <!-- show My Blog only if user is authenticated -->
             {% if user.is_authenticated %}
                 <ul class="nav navbar-nav ">
-                    <li class="active"><a href="{% url 'blog:user_posts' user.username %}">My Blog</a></li>
+                    <li class="active"><a href="{% url 'blog:search_post'%}">My Blog</a></li>
                 </ul>
             {% endif %}
-            <!-- show new post only if user is authenticated -->
             {% if user.is_authenticated %}
                 <ul class="nav navbar-nav ">
                     <li class="active"><a href="{% url 'blog:create_post' %}">New Post</a></li>

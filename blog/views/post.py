@@ -1,11 +1,15 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 from django.views import generic
-from django.views.generic import CreateView, UpdateView, DeleteView
+from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 
 from blog.models.comment import Comment
-from blog.models.post import Post
+from blog.models.post import Post,Tag
 
+from django import forms
+
+class NameForm(forms.Form):
+    your_name = forms.CharField(label='Your name', max_length=100)
 
 class PostView(generic.DetailView):
     model = Post
@@ -30,6 +34,22 @@ class PostCreate(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
+def PostSearch(request,*args,**kwargs):
+    # model = Post
+    # fields = ['title']
+    allTags = Tag.objects.filter()
+    names = []
+    for tag in allTags:
+        my_tuple = (tag.name,tag.name)
+        names.append(tag)
+    form = NameForm()
+    return render(request, '/blog/search_post.html', {'form': form})
+    # template_name = 'blog/search_post.html'
+    # login_url = reverse_lazy('login')
+
+    # def test_func(self):
+    #     return Post.objects.get(id=self.kwargs['pk']).user == self.request.user
+
 
 class PostUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
@@ -37,8 +57,14 @@ class PostUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     template_name = 'blog/create_post.html'
     login_url = reverse_lazy('login')
 
+    def test_func(self):
+        return Post.objects.get(id=self.kwargs['pk']).user == self.request.user
+
 
 class PostDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
     success_url = reverse_lazy('blog:home')
     login_url = reverse_lazy('login')
+
+    def test_func(self):
+        return Post.objects.get(id=self.kwargs['pk']).user == self.request.user
