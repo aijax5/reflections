@@ -1,89 +1,231 @@
 <!-- this is base template with navbar and footer -->
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html class="no-js" lang="en">
+
 <head>
-    <title>Django Blog</title>
+    <meta charset="utf-8">
+    
+    <!--====== Title ======-->
+    <title>Reflections</title>
+    
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
-          rel="stylesheet" media="screen"/>
-    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}"/>
-
+    <!--====== Favicon Icon ======-->
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/png">
+        
+    <!--====== Magnific Popup CSS ======-->
+    <link rel="stylesheet" href="assets/css/magnific-popup.css">
+        
+    <!--====== Slick CSS ======-->
+    <link rel="stylesheet" href="assets/css/slick.css">
+        
+    <!--====== Line Icons CSS ======-->
+    <link rel="stylesheet" href="assets/css/LineIcons.css">
+        
+    <!--====== Bootstrap CSS ======-->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    
+    <!--====== Default CSS ======-->
+    <link rel="stylesheet" href="assets/css/default.css">
+    
+    <!--====== Style CSS ======-->
+    <link rel="stylesheet" href="assets/css/style.css">
+    
 </head>
+
 <body>
+    <!--[if IE]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+   
+    <!--====== PRELOADER PART START ======-->
 
-<!-- navbar -->
-<nav class="navbar navbar-inverse">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="{% url 'blog:home' %}">Blog App</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse navbar-right">
-            {% if not user.is_authenticated %}
-                <ul class="nav navbar-nav ">
-                    <li class="active"><a href="{% url 'register' %}">Registration</a></li>
-                </ul>
-            {% endif %}
-            {% if not user.is_authenticated %}
-                <ul class="nav navbar-nav ">
-                    <li class="active"><a href="{% url 'login' %}">Login</a></li>
-                </ul>
-            {% endif %}
-            {% if user.is_authenticated %}
-                <ul class="nav navbar-nav ">
-                    <li class="active"><a href="{% url 'blog:search_post'%}">My Blog</a></li>
-                </ul>
-            {% endif %}
-            {% if user.is_authenticated %}
-                <ul class="nav navbar-nav ">
-                    <li class="active"><a href="{% url 'blog:create_post' %}">New Post</a></li>
-                </ul>
-            {% endif %}
-            <!-- show sign out only if user is authenticated -->
-            {% if user.is_authenticated %}
-                <ul class="nav navbar-nav ">
-                    <li class="active"><a href="{% url 'logout' %}">Sign Out</a></li>
-                </ul>
-            {% endif %}
-        </div>
-    </div>
-</nav>
-
-<div id="content">
-    {% block content %}{% endblock %}
-</div>
-
-<hr>
-
-<!-- footer -->
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12">
-
-            <!-- Logged user info -->
-            {% if user.is_authenticated %}
-                <p class="text-center">
-                    | Logged user: {{ user.username }}
-                    | Email: {{ user.email }}
-                    | Admin:{{ user.is_superuser }}
-                    | <a href="{% url 'logout' %}">Sign Out</a>
-                </p>
-            {% endif %}
-
-            <div>
-                <p class="text-center">&copy; 2017 Dusan Reljic</p>
+    <div class="preloader">
+        <div class="loader">
+            <div class="ytp-spinner">
+                <div class="ytp-spinner-container">
+                    <div class="ytp-spinner-rotator">
+                        <div class="ytp-spinner-left">
+                            <div class="ytp-spinner-circle"></div>
+                        </div>
+                        <div class="ytp-spinner-right">
+                            <div class="ytp-spinner-circle"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
         </div>
     </div>
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
-</div>
+    <!--====== PRELOADER PART ENDS ======-->
+    
+    <!--====== NAVBAR TWO PART START ======-->
 
+    <section class="navbar-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <nav class="navbar navbar-expand-lg">
+                       
+                        <a class="navbar-brand" href="{% url 'blog:home' %}">
+                            <img src="assets/images/logo.svg" alt="Logo">
+                        </a>
+                        
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTwo" aria-controls="navbarTwo" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="toggler-icon"></span>
+                            <span class="toggler-icon"></span>
+                            <span class="toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse sub-menu-bar" id="navbarTwo">
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item active"><a class="page-scroll" href="{% url 'blog:home' %}">home</a></li>
+                                <li class="nav-item"><a class="page-scroll" href="#Recent">Blogs</a></li>
+                                {% if user.is_authenticated %}
+                                    <li class="nav-item"><a class="page-scroll" href="{% url 'blog:create_post' %}">publish</a></li>
+                                {% else %}
+                                    <li class="nav-item"><a class="page-scroll" href="{% url 'login' %}">publish</a></li>
+                                {% endif %}
+                                <li class="nav-item"><a class="page-scroll" href="{% url 'blog:search_post'%}">search</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="navbar-btn d-none d-sm-inline-block ml-25">
+                            <ul>
+                                {% if not user.is_authenticated %}
+                                    <li><a class="solid" href="{% url 'login' %}">Login</a></li>
+                                {% else %}
+                                    <li><a class="solid" href="{% url 'logout' %}">logout</a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </nav> <!-- navbar -->
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
+    </section>
+
+    <!--====== SLIDER PART START ======-->
+
+    <section id="home" class="slider_area">
+        <div id="carouselThree" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="slider-content">
+                                    <h1 class="title">Reflections.</h1>
+                                    <p class="text">Hi, this is my personal blogging website where we talk about computer science, finance and life in general</p>
+                                    <ul class="slider-btn rounded-buttons">
+                                        <li><a class="main-btn rounded-one" href="#">publish a blog</a></li>
+                                        <!-- <li><a class="main-btn rounded-two" href="#">DOWNLOAD</a></li> -->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div> <!-- row -->
+                    </div> <!-- container -->
+                    <div class="slider-image-box d-none d-lg-flex align-items-end">
+                        <div class="slider-image">
+                            <img src="assets/images/slider/1.png" alt="Hero">
+                        </div> <!-- slider-imgae -->
+                    </div> <!-- slider-imgae box -->
+                </div> <!-- carousel-item -->
+        </div>
+    </section>
+
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+
+    <hr>
+
+    <!--====== FOOTER PART START ======-->
+
+    <section class="footer-area footer-dark">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="footer-logo text-center">
+                        <a class="mt-30" href="index.html"><img src="assets/images/logo.svg" alt="Logo"></a>
+                    </div> <!-- footer logo -->
+                    <div class="copyright text-center mt-35">
+                        <div class="col-sm-12">
+                            {% if user.is_authenticated %}
+                                <p class="text"> Currently logged in as {{ user.username }}</p>
+                            {% endif %}
+                        </div>
+                        <p class="text">This site is developed as a part of course work for DDS at BITS Pilani </a> </p>
+                    </div> <!--  copyright -->
+                    <div class="footer-support text-center">
+                        
+                        <span class="number">Developed by</span>
+                        <span class="mail">Mohammed Ajaaz - 2019H1030019H</span>
+                        <span class="mail">Anupam Chandra - 2019H1030020H</span>
+                    </div>
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
+    </section>
+
+    <!--====== FOOTER PART ENDS ======-->
+    
+    <!--====== BACK TOP TOP PART START ======-->
+
+    <a href="#" class="back-to-top"><i class="lni lni-chevron-up"></i></a>
+
+    <!--====== BACK TOP TOP PART ENDS ======-->    
+
+    <!--====== PART START ======-->
+
+<!--
+    <section class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+-->
+
+    <!--====== PART ENDS ======-->
+
+
+
+
+    <!--====== Jquery js ======-->
+    <script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
+    
+    <!--====== Bootstrap js ======-->
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    
+    <!--====== Slick js ======-->
+    <script src="assets/js/slick.min.js"></script>
+    
+    <!--====== Magnific Popup js ======-->
+    <script src="assets/js/jquery.magnific-popup.min.js"></script>
+    
+    <!--====== Ajax Contact js ======-->
+    <script src="assets/js/ajax-contact.js"></script>
+    
+    <!--====== Isotope js ======-->
+    <script src="assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="assets/js/isotope.pkgd.min.js"></script>
+    
+    <!--====== Scrolling Nav js ======-->
+    <script src="assets/js/jquery.easing.min.js"></script>
+    <script src="assets/js/scrolling-nav.js"></script>
+    
+    <!--====== Main js ======-->
+    <script src="assets/js/main.js"></script>
+    
 </body>
+
 </html>
