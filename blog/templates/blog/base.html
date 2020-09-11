@@ -43,6 +43,7 @@
    
     <!--====== PRELOADER PART START ======-->
 
+<<<<<<< HEAD
     <!-- <div class="preloader">
         <div class="loader">
             <div class="ytp-spinner">
@@ -57,6 +58,41 @@
                     </div>
                 </div>
             </div>
+=======
+<!-- navbar -->
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{% url 'blog:home' %}">Blog App</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse navbar-right">
+            {% if not user.is_authenticated %}
+                <ul class="nav navbar-nav ">
+                    <li class="active"><a href="{% url 'register' %}">Registration</a></li>
+                </ul>
+            {% endif %}
+            {% if not user.is_authenticated %}
+                <ul class="nav navbar-nav ">
+                    <li class="active"><a href="{% url 'login' %}">Login</a></li>
+                </ul>
+            {% endif %}
+            {% if user.is_authenticated %}
+                <ul class="nav navbar-nav ">
+                    <li class="active"><a href="{% url 'blog:search_post'%}">Search Blog</a></li>
+                </ul>
+            {% endif %}
+            {% if user.is_authenticated %}
+                <ul class="nav navbar-nav ">
+                    <li class="active"><a href="{% url 'blog:create_post' %}">New Post</a></li>
+                </ul>
+            {% endif %}
+            <!-- show sign out only if user is authenticated -->
+            <!-- {% if user.is_authenticated %}
+                <ul class="nav navbar-nav ">
+                    <li class="active"><a href="{% url 'logout' %}">Sign Out</a></li>
+                </ul>
+            {% endif %} -->
+>>>>>>> 5605d5e683cbc70c045318c615fcef31da9fcb2f
         </div>
     </div> -->
 
@@ -114,6 +150,7 @@
     <div id="content">
         {% block content %}{% endblock %}
     </div>
+<<<<<<< HEAD
 
     <hr>
 
@@ -168,6 +205,37 @@
 -->
 
     <!--====== PART ENDS ======-->
+=======
+</nav>
+
+<div id="content">
+    {% block content %}{% endblock %}
+</div>
+
+<hr>
+
+<!-- footer -->
+<div class="container">
+    <!-- <div class="row">
+        <div class="col-sm-12">
+
+            Logged user info -->
+            <!-- {% if user.is_authenticated %}
+                <p class="text-center">
+                    | Logged user: {{ user.username }}
+                    | Email: {{ user.email }}
+                    | Admin:{{ user.is_superuser }}
+                    | <a href="{% url 'logout' %}">Sign Out</a>
+                </p>
+            {% endif %}
+
+            <div>
+                <p class="text-center">&copy; 2017 Dusan Reljic</p>
+            </div>
+
+        </div> -->
+    <!-- </div>  -->
+>>>>>>> 5605d5e683cbc70c045318c615fcef31da9fcb2f
 
 
 

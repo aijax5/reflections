@@ -4,33 +4,37 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
-                <!-- <form action="/your-name/" method="post">
+                <form action="{% url 'blog:user_posts' user.username %}" method="" class="form-horizontal">
                     {% csrf_token %}
-                    {{ form }}
-                    <input type="submit" value="Submit">
-                </form> -->
-                <form action="" method="POST">
-                    {% csrf_token %}
-                    {{ form }}
-                    <input type="submit" value="Submit">
-                    <!-- <label for="your_name">Your name: </label></br>
-                    <input id="your_name" type="text" name="your_name" value="{{  }}">
-                    <input type="submit" value="Search"> -->
-                </form>
-                <!-- <form action="" method="" class="form-horizontal">
-
-                    {% csrf_token %}
-
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <div class="col-sm-9">
                             <input type="text"
                                    placeholder="Search your tag here"
                                    class="form-control"
-                                   name="title"
+                                   name="tag"
                                    value="{{ form.title.value|default:"" }}">
 
                         </div>
+                    </div> -->
+                    <!-- <form action="" method="post">
+                        {% csrf_token %} -->
+                    <div class="form-group">
+                        <div class="col-sm-9">
+                        <label for="pet-select">Select a Tag:</label>
+
+                        <select name="pets" id="pet-select">
+                            <option value="">--Please choose an option--</option>
+                            <option value="tag1">tag1</option>
+                            <option value="tag1">tag2</option>
+                        </select>
+                            <!-- <select >
+                            <option selected="selected" disabled>Select Tag:</option>
+                            
+                            </select> -->
+                        </div>
                     </div>
+                        <!-- <input type="submit" value="Select">
+                      </form> -->
                     <div class="form-group">
                         <div class="col-sm-9">
                             <input type="submit" class="btn btn-primary btn-block"></input>
@@ -38,7 +42,7 @@
                         </div>
                     </div>
 
-                </form> -->
+                </form>
 
             </div>
         </div>

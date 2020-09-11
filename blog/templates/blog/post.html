@@ -8,6 +8,7 @@
 
             <!-- Post title -->
             <h1>{{ post.title }}</h1>
+            <!-- <h2>{{post.tag.name}}</h2> -->
 
             <div> Created {{ post.pub_date }} by
                 <a href="{% url 'blog:user_posts' post.user.username %}">{{ post.user.username }}</a>
