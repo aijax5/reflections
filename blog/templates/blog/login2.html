@@ -1,0 +1,44 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+<header class="header">
+        
+
+    <div class="hero">
+        <form method="post" action="{% url 'login' %}" >
+            {% csrf_token %}
+            <div class="hero__login">
+                <h1 class="heading__primary u-margin-bottom-med">Login</h1>
+                <div class="u-margin-bottom-med">
+                    <div class="input__label ">Username</div>
+                    <input type="text" name="email" id="email" class="input__field" placeholder="aijax">
+                </div>
+                <div class="u-margin-bottom-med">
+                        <div class="input__label ">password</div>
+                        <input type="password" name="password" id="password" class="input__field" placeholder="dds12345">
+                </div>
+                <div class="btn__container u-margin-bottom-med">
+                    <input type = "submit" class="btn btn-blue" value="Login"> login <i class="material-icons md-5">arrow_right</i></a>
+                </div>
+            </div>
+            <input type="hidden" name="next" value="{% url 'blog:home' %}"/>
+
+        </form>
+
+
+        <div class="hero__content">
+            <div class="heading__large">Welcome to<br/>
+                <span class="heading__large heading__bold">Reflections,</span>
+            </div>
+            
+            <h2 class="heading__secondary">
+                Share your knowledge and opinions to the world, even if nobody cares.
+            </h2>
+        </div>
+
+        
+    </div>
+
+</header>
+{% endblock %}
+  
