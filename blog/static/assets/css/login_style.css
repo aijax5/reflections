@@ -63,7 +63,7 @@ body {
 
 .heading__primary{
   font-size: 3.6rem;
-  color: #4C84FF;
+  color: #0067f4;
   padding: 3rem 0;
   font-weight: 400;
 }
@@ -102,8 +102,8 @@ input{
   font-size: 1.4rem;
 }
 input:focus{
-  color: #4C84FF;
-  border: 1px solid #4C84FF;
+  color: #0067f4;
+  border: 1px solid #0067f4;
 }
 .btn__container{
   display: flex;
@@ -135,7 +135,7 @@ input:focus{
   box-shadow: 0rem 0.8rem 1.6rem rgba(44, 44, 46, 0.2); }
 
 .btn-blue {
-  background-color: #4C84FF;
+  background-color: #0067f4;
   display: flex;
   align-items: center;
   color: white; }
@@ -148,18 +148,18 @@ input:focus{
   padding: 2px; }
 
 .btn-text:hover {
-  color: #4C84FF;
-  border-bottom: 1px solid #4C84FF;  
+  color: #0067f4;
+  border-bottom: 1px solid #0067f4;  
 }
 
 .btn-text:active {
   transform: translateY(0); }
 
 .btn-text--blue{
-  color: #4C84FF;
+  color: #0067f4;
   text-decoration: none;
   font-size: 1.4rem;
-  border-bottom: 1px solid #4C84FF;
+  border-bottom: 1px solid #0067f4;
   padding: 2px;
 }.btn-text--blue:hover {
   color: #C2CFD8;
@@ -167,5 +167,55 @@ input:focus{
 }
 
 .text__blue{
-  color: #4C84FF; 
+  color: #0067f4; 
+}
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+  background: #2c3e50;
+  background-image: none;
+}
+/* Remove IE arrow */
+select::-ms-expand {
+  display: none;
+}
+/* Custom Select */
+.select {
+  position: relative;
+  display: flex;
+  width: 20em;
+  height: 3em;
+  line-height: 3;
+  background: #2c3e50;
+  overflow: hidden;
+  border-radius: .25em;
+}
+select {
+  flex: 1;
+  padding: 0 .5em;
+  color: #fff;
+  cursor: pointer;
+}
+/* Arrow */
+.select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 1em;
+  background: #34495e;
+  cursor: pointer;
+  pointer-events: none;
+  -webkit-transition: .25s all ease;
+  -o-transition: .25s all ease;
+  transition: .25s all ease;
+}
+/* Transition */
+.select:hover::after {
+  color: #0067f4;
 }

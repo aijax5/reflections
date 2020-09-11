@@ -1,66 +1,69 @@
-{% extends "blog/base.html" %}
-
-{% block content %}
-    <div class="container">
-
-        <!-- Post -->
-        <div class="jumbotron">
-
-            <!-- Post title -->
-            <h1>{{ post.title }}</h1>
-            <!-- <h2>{{post.tag.name}}</h2> -->
-
-            <div> Created {{ post.pub_date }} by
-                <a href="{% url 'blog:user_posts' post.user.username %}">{{ post.user.username }}</a>
+{% extends "blog/base.html" %} {% block content %}
+<div class="container features-area mt-20">
+    <!-- Post -->
+    <div class="col-sm-12" >
+        <div class="single-features mt-40">
+            <div class="features-title-icon d-flex justify-content-between">
+                <h2 class="features-title">{{ post.title }}</h2>
             </div>
 
-            <!-- Post body -->
-            <h3>{{ post.body }}</h3>
+            <div class="text black">
+                <i>Created {{ post.pub_date }} by
+                    <a href="{% url 'blog:user_posts' post.user.username %}">{{ post.user.username }}</a>
+                </i>
+            </div>
+
+            <div class="features-content">
+                <p class="text">{{ post.body }}</p>
+            </div>
 
             <!-- Show Update and Delete button only if User is the owner of the Post -->
             {% if post.user == user %}
-                <div class="row">
+            <div class="row">
+                <!-- Delete button -->
+                <a href="{% url 'blog:delete_post' post.pk %}" class="col-md-2 pull-right">
+                    <button type="button" class="btn btn-primary btn-block">
+                        Delete
+                    </button>
+                </a>
 
-                    <!-- Delete button -->
-                    <a href="{% url 'blog:delete_post' post.pk %}" class="col-md-2 pull-right">
-                        <button type="button" class="btn btn-primary btn-block">Delete</button>
-                    </a>
-
-                    <!-- Update button -->
-                    <a href="{% url 'blog:update_post' post.pk %}" class="col-md-2 pull-right">
-                        <button type="button" class="btn btn-primary btn-block">Update</button>
-                    </a>
-
-                </div>
-            {% endif %}
-
-        </div>
-
-        <h2>Comments:</h2>
-
-        <!-- Comments -->
-        {% for comment in comments %}
-            <div class="well">
-
-                <div> Created {{ comment.pub_date }} by
-                    <a href="{% url 'blog:user_posts' comment.user.username %}">{{ comment.user.username }}</a>
-                </div>
-
-                <!-- Comment body -->
-                <h3> {{ comment.body }}</h3>
-
+                <!-- Update button -->
+                <a href="{% url 'blog:update_post' post.pk %}" class="col-md-2 pull-right">
+                    <button type="button" class="btn btn-primary btn-block">
+                        Update
+                    </button>
+                </a>
             </div>
-        {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="container mt-50">
+        <h4 class="">Comments:</h4>
 
         <!-- Show Comment button only if User is authenticated -->
         {% if user.is_authenticated %}
 
-            <!-- Comment button -->
-            <a href="{% url 'blog:create_comment' post.pk %}" class="col-md-2 pull-right">
-                <button type="button" class="btn btn-primary btn-block">Comment</button>
-            </a>
+        <!-- Comment button -->
+        <a href="{% url 'blog:create_comment' post.pk %}" class="col-md-2 pull-right mt-20">
+            <button type="button" class="btn btn-primary btn-block">Comment</button>
+        </a>
 
         {% endif %}
+        <div class="row ml-20"></div>
+        {% for comment in comments %}
+        <div class="single-features col-sm-10 mt-10">
+            <div class="features-content">
+                <div class="black">
+                    <i>
+                        Created {{ comment.pub_date }} by
+                        <a href="{% url 'blog:user_posts' comment.user.username %}">{{ comment.user.username }}</a></i>
+                </div>
 
+                <!-- Comment body -->
+                <p class="text">{{ comment.body }}</p>
+            </div>
+        </div>
+        {% endfor %}
     </div>
+</div>
 {% endblock content %}
