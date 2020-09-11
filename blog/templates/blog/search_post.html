@@ -19,13 +19,19 @@
                     <!-- <form action="" method="post">
                         {% csrf_token %} -->
                     <div class="form-group">
-                        <!-- <div class="col-sm-9"></div> -->
-                            <select >
-                            <option selected="selected" disabled>Select Tag:</option>
+                        <div class="col-sm-9">
+                        <label for="pet-select">Select a Tag:</label>
+
+                        <select name="pets" id="pet-select">
+                            <option value="">--Please choose an option--</option>
                             <option value="tag1">tag1</option>
                             <option value="tag1">tag2</option>
-                            </select>
-                        <!-- </div> -->
+                        </select>
+                            <!-- <select >
+                            <option selected="selected" disabled>Select Tag:</option>
+                            
+                            </select> -->
+                        </div>
                     </div>
                         <!-- <input type="submit" value="Select">
                       </form> -->

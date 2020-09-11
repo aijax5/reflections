@@ -12,8 +12,8 @@ from django import forms
 class NameForm(forms.Form):
     tags = forms.CharField(label='Your name', max_length=100)
 
-def PageObjects(request):
-    print(request)
+# def PageObjects(request):
+#     print(request)
 #   if request.method == 'POST':
 #     form = NameForm(request.POST)
 #     print(form)
@@ -30,7 +30,14 @@ class PostView(generic.DetailView):
         context = super().get_context_data(**kwargs)
         # Add in the username
         comments = Comment.objects.filter(post=self.kwargs['pk'])
+        post = Post.objects.filter(pk = self.kwargs['pk'])
         context['comments'] = comments
+        #post=self.kwargs['tag']
+        for item in post:
+            # tagObj = item.object
+            print(item.tag.name)
+        # print(post[0]['user'])
+        # context['tag'] = post.name
         return context
 
 
