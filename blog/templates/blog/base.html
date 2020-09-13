@@ -123,8 +123,11 @@
 
     <!--====== SLIDER PART START ======-->
 
-
+    {%if home_page %}
     <div id="content">
+    {% else %}
+    <div id="content" class="mt-200">
+    {% endif %}
         {% block content %}{% endblock %}
     </div>
 
